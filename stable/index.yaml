@@ -1,5 +1,5 @@
 channel: stable
-version: 1.37.1+k0s.0
+version: 0.0.0-test
 downloadURLs:
 - arch: amd64
   os: linux
