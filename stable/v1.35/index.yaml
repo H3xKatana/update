@@ -1,0 +1,21 @@
+channel: stable/v1.35
+version: 1.35.9+k0s.0
+downloadURLs:
+- arch: amd64
+  os: linux
+  k0s: https://github.com/k0sproject/k0s/releases/download/v1.35.9%2Bk0s.0/k0s-v1.35.9%2Bk0s.0-amd64
+  k0sSha256: 517b88e10665c35fd546fcb9d9d358be1f480ec3d8f2e7d18ef588831eae64fb
+  airgapBundle: https://github.com/k0sproject/k0s/releases/download/v1.35.9%2Bk0s.0/k0s-airgap-bundle-v1.35.9%2Bk0s.0-amd64
+  airgapSha256: 5c228c23abf6b4572ed2a76cb7ef3b63c75fc0cb3347aba1aaa49be93744c12f
+- arch: arm64
+  os: linux
+  k0s: https://github.com/k0sproject/k0s/releases/download/v1.35.9%2Bk0s.0/k0s-v1.35.9%2Bk0s.0-arm64
+  k0sSha256: e644aea496c41febdc55754d8589a326267c22179fdc3418a52cea401a9ec5c4
+  airgapBundle: https://github.com/k0sproject/k0s/releases/download/v1.35.9%2Bk0s.0/k0s-airgap-bundle-v1.35.9%2Bk0s.0-arm64
+  airgapSha256: 4383ed1735583b5164e007aa899e74f3957c0516e5048d5b1c8a5443b56e23d0
+- arch: arm
+  os: linux
+  k0s: https://github.com/k0sproject/k0s/releases/download/v1.35.9%2Bk0s.0/k0s-v1.35.9%2Bk0s.0-arm
+  k0sSha256: 8ba03ec4cf03489f6e1c74db6acf897ffb0082fa5701287393697358c4ed3f45
+  airgapBundle: https://github.com/k0sproject/k0s/releases/download/v1.35.9%2Bk0s.0/k0s-airgap-bundle-v1.35.9%2Bk0s.0-arm
+  airgapSha256: 8a48e32411a934901be831a50a2c05659ea6d91f623eeec8b1d7e8ccbde0dc3e
