@@ -54,3 +54,28 @@ downloadURLs:
 ```
 
 So each channel can offer only single version to k0s autopilot client. In general the design pattern here is that each major.minor version will have their own channel where the latest patch release is offered.
+
+## Automation
+
+`.github/workflows/update-channels.yml` updates the channel files for a single
+k0s release. The k0s repository calls it when a release is published. It also
+runs from the Actions tab or from the CLI:
+
+```shell
+gh workflow run update-channels.yml -f version=1.37.2+k0s.1
+```
+
+The workflow runs `scripts/update_channel.sh`. The version is the only required
+input, because the version decides the rest:
+
+- `1.37.2+k0s.1` writes `v1.37/stable`
+- `1.38.0-rc.1+k0s.0` writes `v1.38/unstable`, and only when asked for
+- `--latest` also writes `latest/stable`, or `latest/unstable` for a pre-release
+- `latest` follows `latest/stable`
+
+URLs and checksums come from the release asset list and its `sha256sums.txt`, so
+no k0s binary or airgap bundle is downloaded. Airgap bundle names changed in
+v1.36, so the script picks the name the release publishes.
+
+The workflow opens a pull request and leaves the merge to a human. It never
+pushes to `main` and never deletes a channel.
