@@ -4,10 +4,39 @@ This repo serves as k0s update server reference implementation. It provides the 
 
 ## Available channels
 
-- stable
-- stable/v1.27
-- stable/v1.28
-- stable/v1.29
+| Channel | Content |
+|---|---|
+| `vX.Y/stable` | Newest release of minor version X.Y, excluding pre-releases |
+| `vX.Y/unstable` | Newest release of minor version X.Y, including pre-releases |
+| `latest/stable` | Newest release, excluding pre-releases |
+| `latest/unstable` | Newest release, including pre-releases |
+| `latest` | Same as `latest/stable`, for backwards compatibility |
+
+A `vX.Y/*` channel only ever moves within its own minor version. A `latest/*`
+channel moves across minor versions.
+
+## Choosing a channel
+
+Nothing in k0s checks the version skew between a cluster and an update. A
+channel that moves across minor versions can offer a cluster a version it
+cannot be upgraded to in one step, whatever it currently runs.
+
+Use a `vX.Y/*` channel for autopilot. It stays within the minor version, so its
+plans respect the skew policy. Moving to the next minor version is a manual
+switch to another channel.
+
+A `latest/*` channel still moves across minors. Use it when that is what you
+want, and expect plans to cross minor versions.
+
+## Deprecated channels
+
+`stable`, `stable/v1.27`, `stable/v1.28`, `stable/v1.29` and `unstable` are
+frozen. They keep serving what they serve today and get no further updates.
+
+`stable` and `https://updates.k0sproject.io` are the defaults of the
+`UpdateConfig` CRD, and released k0s versions read `latest` for their update
+notifications. Those channels stay in place until k0s changes its defaults;
+that change is out of scope for this repository.
 
 ## Channel "protocol"
 
@@ -23,9 +52,9 @@ Essentially k0s autopilot assumes the folowing structure for update channels:
 Each the channel name can contain e.g. forward slashes so you can structure the channels for example like so:
 
 ```text
-stable/v1.28/
+v1.36/stable/
     index.yaml
-unstable/v1.28/
+v1.36/unstable/
     index.yaml
 ```
 
