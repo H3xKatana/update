@@ -73,9 +73,21 @@ input, because the version decides the rest:
 - `--latest` also writes `latest/stable`, or `latest/unstable` for a pre-release
 - `latest` follows `latest/stable`
 
+A final release also moves `vX.Y/unstable` and `latest/unstable` when those
+channels already exist, because both mean "newest release of that line,
+pre-releases included". Without that, a channel would stay on an older release
+candidate for good. A run never creates a channel the release does not belong
+to, and never deletes one.
+
 URLs and checksums come from the release asset list and its `sha256sums.txt`, so
 no k0s binary or airgap bundle is downloaded. Airgap bundle names changed in
-v1.36, so the script picks the name the release publishes.
+v1.36, so the script picks the name the release publishes. A release that is
+missing any asset, or whose release metadata disagrees with the version string,
+is refused before a single file is written.
 
-The workflow opens a pull request and leaves the merge to a human. It never
-pushes to `main` and never deletes a channel.
+The workflow opens a pull request on a `channel/k0s-<version>` branch and leaves
+the merge to a human. It never pushes to `main` and never deletes a channel.
+Re-dispatching the same release updates that branch and its pull request.
+
+The script needs only `sh`, `gh`, `awk`, `sed` and `cmp`, so it runs offline
+against fixtures: `sh scripts/update_channel_test.sh`.
