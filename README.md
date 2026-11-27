@@ -6,10 +6,10 @@ This repo serves as k0s update server reference implementation. It provides the 
 
 | Channel | Content |
 |---|---|
-| `vX.Y/stable` | Newest release of minor version X.Y, excluding pre-releases |
-| `vX.Y/unstable` | Newest release of minor version X.Y, including pre-releases |
-| `latest/stable` | Newest release, excluding pre-releases |
-| `latest/unstable` | Newest release, including pre-releases |
+| `vX.Y/stable` | Highest released version of minor version X.Y, excluding pre-releases |
+| `vX.Y/unstable` | Highest released version of minor version X.Y, including pre-releases |
+| `latest/stable` | Highest released version, excluding pre-releases |
+| `latest/unstable` | Highest released version, including pre-releases |
 | `latest` | Same as `latest/stable`, for backwards compatibility |
 
 A `vX.Y/*` channel only ever moves within its own minor version. A `latest/*`
@@ -34,9 +34,12 @@ want, and expect plans to cross minor versions.
 frozen. They keep serving what they serve today and get no further updates.
 
 `stable` and `https://updates.k0sproject.io` are the defaults of the
-`UpdateConfig` CRD, and released k0s versions read `latest` for their update
-notifications. Those channels stay in place until k0s changes its defaults;
-that change is out of scope for this repository.
+`UpdateConfig` CRD, and `stable` stays frozen in place until k0s changes its
+default; that change is out of scope for this repository.
+
+`latest` is not frozen. Released k0s versions read `latest` for their update
+notifications, so it follows `latest/stable` and moves from `1.28.2` to the
+current release.
 
 ## Channel "protocol"
 
